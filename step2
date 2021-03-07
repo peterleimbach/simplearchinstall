@@ -77,6 +77,8 @@ pacman -S ${QUIET} network-manager-applet
 pacman -S ${QUIET} gnome-keyring
 systemctl enable NetworkManager.service
 
+pacman -S ${QUIET} firefox qmapshack
+
 rm /step2
 
 exit

@@ -1,24 +1,25 @@
 #!/bin/sh
 
 # Variablen setzen
-PARTITION=/dev/nvm
+PARTITION=/dev/nvme0n1
 export PARTITION
+HOSTNAME=archfun
 
 # deutsche Tastaturbelegung laden
 loadkeys de-latin1
 
 # Festplatte partitionieren
 # es werden alle alten Partitionen gelöscht
-sgdisk --zap-all /dev/sda
+sgdisk --zap-all ${PARTITION}
 # es werden die üblichen drei Partitionen angelegt
-sgdisk -n 0:0:+1GiB -t 0:ea00 -c 0:EFIBOOT /dev/sda
-sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:p_swap /dev/sda
-sgdisk -n 0:0:0 -t 0:8300 -c 0:p_arch /dev/sda
+sgdisk -n 0:0:+1GiB -t 0:ea00 -c 0:EFIBOOT ${PARTITION}p1
+sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:p_swap ${PARTITION}p2
+sgdisk -n 0:0:0 -t 0:8300 -c 0:p_arch ${PARTITION}p3
 
 # Partitionen formatieren
-mkfs.fat -F 32 -n EFIBOOT /dev/sdxY
-mkfs.ext4 -L p_arch /dev/sdxY
-mkswap -L p_swap /dev/sdxY
+mkfs.fat -F 32 -n EFIBOOT ${PARTITION}p1
+mkswap -L p_swap ${PARTITION}p2
+mkfs.ext4 -L p_arch ${PARTITION}p3
 
 # Paritionen mounten
 mount -L p_arch /mnt
@@ -27,9 +28,8 @@ mount -L EFIBOOT /mnt/boot
 swapon -L p_swap
 
 # Filesystem Tabelle erzeugen
-genfstab -Lp /mnt > /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
 vi /mnt/etc/fstab
-### SSD Parameter
 
 # Basissystem installieren
 pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode
@@ -42,8 +42,6 @@ echo archlinux > /etc/hostname
 
 # Die Spracheinstellung (Locale) auf Deutsch festlegen.
 echo LANG=de_DE.UTF-8 > /etc/locale.conf
-
-vi /etc/locale.gen
 locale-gen
 
 echo KEYMAP=de-latin1 > /etc/vconsole.conf
@@ -53,7 +51,7 @@ ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 cat <<EOF > /etc/hosts
 #<ip-address>	<hostname.domain.org>	<hostname>
-127.0.0.1	localhost.localdomain	localhost
+127.0.0.1	localhost.localdomain	localhost ${HOSTNAME}
 ::1		localhost.localdomain	localhost
 EOF
 
@@ -111,6 +109,3 @@ exit
 umount -R /mnt
 
 #reboot
-
-
-

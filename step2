@@ -76,3 +76,7 @@ pacman -S ${QUIET} networkmanager
 pacman -S ${QUIET} network-manager-applet
 pacman -S ${QUIET} gnome-keyring
 systemctl enable NetworkManager.service
+
+rm /step2
+
+exit

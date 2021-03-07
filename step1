@@ -13,7 +13,7 @@ loadkeys de-latin1
 sgdisk --zap-all ${PARTITION}
 # es werden die üblichen drei Partitionen angelegt
 sgdisk -n 0:0:+1GiB -t 0:ef00 -c 0:EFIBOOT ${PARTITION}
-sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:p_swap ${PARTITION}
+sgdisk -n 0:0:+8GiB -t 0:8200 -c 0:p_swap ${PARTITION}
 sgdisk -n 0:0:0 -t 0:8300 -c 0:p_arch ${PARTITION}
 
 # Partitionen formatieren

@@ -50,7 +50,8 @@ EOF
 # weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
 pacman -S bash
 echo "weiteren Benutzer anlegen"
-useradd -m -g users,wheel -s /bin/bash peter
+useradd -m -g users -s /bin/bash peter
+gpasswd -a peter wheel
 passwd peter
 vi /etc/sudoers
 

@@ -1,3 +1,4 @@
+QUIET="--noconfirm"
 # Hostnamen setzen
 echo archlinux > /etc/hostname
 
@@ -26,15 +27,15 @@ passwd
 # Installation des Bootloaders
 echo "Installation des Bootloaders"
 pacman -Syu
-pacman -S efibootmgr dosfstools gptfdisk vim
-pacman -S grub
+pacman -S ${QUIET} efibootmgr dosfstools gptfdisk vim
+pacman -S ${QUIET} grub
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub --recheck 
 mkdir -p /boot/grub/locale
 cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
-pacman -S bash
+pacman -S ${QUIET} bash
 echo "weiteren Benutzer anlegen"
 useradd -m -g users -s /bin/bash peter
 gpasswd -a peter wheel
@@ -42,13 +43,13 @@ passwd peter
 vim /etc/sudoers
 
 systemctl enable --now fstrim.timer
-pacman -S acpid dbus avahi cups
+pacman -S ${QUIET} acpid dbus avahi cups
 systemctl enable acpid
 systemctl enable avahi-daemon
 systemctl enable cups.service
 systemctl enable --now systemd-timesyncd.service
 
-pacman -S xorg-server xorg-xinit xf86-video-intel
+pacman -S ${QUIET} xorg-server xorg-xinit xf86-video-intel
 cat <<EOF > /etc/X11/xorg.conf.d/00-keyboard.conf
 Section "InputClass"
       Identifier "keyboard"
@@ -59,19 +60,19 @@ Section "InputClass"
 EndSection
 EOF
 
-pacman -S ttf-dejavu
-pacman -S xf86-input-synaptics
+pacman -S ${QUIET} ttf-dejavu
+pacman -S ${QUIET} xf86-input-synaptics
 
 # Xfce an sich
-pacman -S xfce4 
+pacman -S ${QUIET} xfce4 
 
 # xfce4-goodies enthält weitere Programme und Plugins.
-pacman -S xfce4-goodies
+pacman -S ${QUIET} xfce4-goodies
 
-pacman -S lightdm lightdm-gtk-greeter
+pacman -S ${QUIET} lightdm lightdm-gtk-greeter
 systemctl enable lightdm.service
 
-pacman -S networkmanager network-manager-applet nm-conection-editor
-pacman -S gnome-keyring
+pacman -S ${QUIET} networkmanager
+pacman -S ${QUIET} network-manager-applet
+pacman -S ${QUIET} gnome-keyring
 systemctl enable NetworkManager.service
-

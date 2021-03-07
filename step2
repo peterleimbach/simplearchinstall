@@ -71,7 +71,7 @@ pacman -S xfce4-goodies
 pacman -S lightdm lightdm-gtk-greeter
 systemctl enable lightdm.service
 
-pacman -S Networkmanager network-manager-applet nm-conection-editor
+pacman -S networkmanager network-manager-applet nm-conection-editor
 pacman -S gnome-keyring
 systemctl enable NetworkManager.service
 

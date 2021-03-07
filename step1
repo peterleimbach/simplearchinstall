@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Variablen setzen
+PARTITION=/dev/nvme0n1
+export PARTITION
+HOSTNAME=archfun
+
+# deutsche Tastaturbelegung laden
+loadkeys de-latin1
+
+# Festplatte partitionieren
+# es werden alle alten Partitionen gelöscht
+sgdisk --zap-all ${PARTITION}
+# es werden die üblichen drei Partitionen angelegt
+sgdisk -n 0:0:+1GiB -t 0:ea00 -c 0:EFIBOOT ${PARTITION}
+sgdisk -n 0:0:+4GiB -t 0:8200 -c 0:p_swap ${PARTITION}
+sgdisk -n 0:0:0 -t 0:8300 -c 0:p_arch ${PARTITION}
+
+# Partitionen formatieren
+mkfs.fat -F 32 -n EFIBOOT ${PARTITION}p1
+mkswap -L p_swap ${PARTITION}p2
+mkfs.ext4 -L p_arch ${PARTITION}p3
+
+# Paritionen mounten
+mount -L p_arch /mnt
+mkdir /mnt/boot
+mount -L EFIBOOT /mnt/boot
+swapon -L p_swap
+
+# Filesystem Tabelle erzeugen
+genfstab -U -p /mnt >> /mnt/etc/fstab
+vi /mnt/etc/fstab
+
+# Basissystem installieren
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode
+
+# chroot in neues Basissystem
+arch-chroot /mnt/

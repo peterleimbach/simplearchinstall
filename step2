@@ -27,8 +27,25 @@ passwd
 echo "Installation des Bootloaders"
 pacman -Syu
 pacman -S efibootmgr dosfstools gptfdisk vim
-efibootmgr -c -d /dev/sda -p 1 -l \vmlinuz-linux -L "Arch Linux efistub" -u "initrd=\initramfs-linux.img root=LABEL=p_arch rw"
-efibootmgr -c -d /dev/sda -p 1 -l \vmlinuz-linux -L "Arch Linux fallback efistub" -u "initrd=\initramfs-linux-fallback.img root=LABEL=p_arch rw"
+bootctl install
+echo <<EOF > /boot/loader/entries/arch-uefi.conf
+title    Arch Linux
+linux    /vmlinuz-linux
+initrd   /initramfs-linux.img
+options  root=LABEL=p_arch rw resume=LABEL=p_swap
+EOF
+
+echo <<EOF > /boot/loader/entries/arch-uefi-fallback.conf
+title    Arch Linux Fallback
+linux    /vmlinuz-linux
+initrd   /initramfs-linux-fallback.img
+options  root=LABEL=p_arch rw resume=LABEL=p_swap
+EOF
+
+echo <<EOF > /boot/loader/loader.conf
+default   arch-uefi.conf
+timeout   3
+EOF
 
 # weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
 pacman -S bash

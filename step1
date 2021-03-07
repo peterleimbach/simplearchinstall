@@ -23,7 +23,7 @@ mkfs.ext4 -L p_arch ${PARTITION}p3
 
 # Paritionen mounten
 mount -L p_arch /mnt
-mkdir /mnt/boot
+mkdir -p /mnt/boot
 mount -L EFIBOOT /mnt/boot
 swapon -L p_swap
 

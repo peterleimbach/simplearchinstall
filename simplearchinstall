@@ -59,11 +59,12 @@ EOF
 mkinitcpio -p linux
 
 # Passwort für den root-User setzen
+echo "Passwort für root setzen\n"
 passwd
 
 # Installation des Bootloaders
 pacman -Syu
-pacman -S efibootmgr dosfstools gptfdisk
+pacman -S efibootmgr dosfstools gptfdisk vim
 efibootmgr -c -d /dev/sda -p 1 -l \vmlinuz-linux -L "Arch Linux efistub" -u "initrd=\initramfs-linux.img root=LABEL=p_arch rw"
 efibootmgr -c -d /dev/sda -p 1 -l \vmlinuz-linux -L "Arch Linux fallback efistub" -u "initrd=\initramfs-linux-fallback.img root=LABEL=p_arch rw"
 

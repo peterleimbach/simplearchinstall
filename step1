@@ -35,5 +35,5 @@ vi /mnt/etc/fstab
 pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode git vim bash
 
 # chroot in neues Basissystem
-cp /simplearchinstall/step2 /mnt/step2
-arch-chroot /mnt/ "sh /step2"
+cp /root/simplearchinstall/step2 /mnt/step2
+arch-chroot /mnt/ /usr/bin/sh /step2

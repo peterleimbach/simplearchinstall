@@ -32,7 +32,7 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 vi /mnt/etc/fstab
 
 # Basissystem installieren
-pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode git vim bash
 
 # chroot in neues Basissystem
 arch-chroot /mnt/

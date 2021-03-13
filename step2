@@ -88,7 +88,11 @@ pacman -S ${QUIET} network-manager-applet
 pacman -S ${QUIET} gnome-keyring
 systemctl enable NetworkManager.service
 
-pacman -S ${QUIET} firefox
+# Firefox an sich
+pacman -S ${QUIET} firefox 
+
+# Deutsches Sprachpaket
+pacman -S ${QUIET} firefox-i18n-de
 
 rm /step2
 

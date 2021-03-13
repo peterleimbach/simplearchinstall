@@ -40,7 +40,7 @@ echo "weiteren Benutzer anlegen"
 useradd -m -g users -s /bin/bash peter
 gpasswd -a peter wheel
 passwd peter
-vim /etc/sudoers
+sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/sudoers
 
 systemctl enable --now fstrim.timer
 pacman -S ${QUIET} acpid dbus avahi cups
@@ -65,20 +65,22 @@ pacman -S ${QUIET} xf86-input-synaptics
 
 ### Xfce (start)
 # Xfce an sich
-# pacman -S ${QUIET} xfce4 
+pacman -S ${QUIET} xfce4 
 
 # xfce4-goodies enthält weitere Programme und Plugins.
-# pacman -S ${QUIET} xfce4-goodies
+pacman -S ${QUIET} xfce4-goodies
 
-# pacman -S ${QUIET} lightdm lightdm-gtk-greeter
-# systemctl enable lightdm.service
+pacman -S ${QUIET} lightdm lightdm-gtk-greeter
+systemctl enable lightdm.service
 
 ### Xfce (end)
 
-pacman -S plasma-meta
-pacman -S kde-applications-meta
-pacman -S sddm sddm-kcm
-systemctl enable sddm.service
+### plasma (start)
+#pacman -S plasma-meta
+#pacman -S kde-applications-meta
+#pacman -S sddm sddm-kcm
+#systemctl enable sddm.service
+### plasma (end)
 
 pacman -S ${QUIET} networkmanager
 pacman -S ${QUIET} network-manager-applet

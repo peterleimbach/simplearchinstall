@@ -17,16 +17,18 @@ cat <<EOF > /etc/hosts
 ::1		localhost.localdomain	localhost
 EOF
 
+# Passwort für root und peter abfragen
+read -p "Passwort für root und peter: " password
+
 # Passwort für den root-User setzen
-echo "Passwort für root setzen"
-passwd
+printf "${password}\n${password}\n" | passwd
 
 # weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
 pacman -S ${QUIET} bash
 echo "weiteren Benutzer anlegen"
 useradd -m -g users -s /bin/bash peter
 gpasswd -a peter wheel
-passwd peter
+printf "${password}\n${password}\n" | passwd peter
 sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/ttt
 mv /etc/ttt /etc/sudoers
 

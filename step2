@@ -17,12 +17,21 @@ cat <<EOF > /etc/hosts
 ::1		localhost.localdomain	localhost
 EOF
 
-# Initramfs erzeugen
-mkinitcpio -p linux
-
 # Passwort für den root-User setzen
 echo "Passwort für root setzen"
 passwd
+
+# weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
+pacman -S ${QUIET} bash
+echo "weiteren Benutzer anlegen"
+useradd -m -g users -s /bin/bash peter
+gpasswd -a peter wheel
+passwd peter
+sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/ttt
+mv /etc/ttt /etc/sudoers
+
+# Initramfs erzeugen
+mkinitcpio -p linux
 
 # Installation des Bootloaders
 echo "Installation des Bootloaders"
@@ -33,15 +42,6 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub
 mkdir -p /boot/grub/locale
 cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
-
-# weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
-pacman -S ${QUIET} bash
-echo "weiteren Benutzer anlegen"
-useradd -m -g users -s /bin/bash peter
-gpasswd -a peter wheel
-passwd peter
-sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/ttt
-mv /etc/ttt /etc/sudoers
 
 systemctl enable --now fstrim.timer
 pacman -S ${QUIET} acpid dbus avahi cups

@@ -40,7 +40,8 @@ echo "weiteren Benutzer anlegen"
 useradd -m -g users -s /bin/bash peter
 gpasswd -a peter wheel
 passwd peter
-sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/sudoers
+sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/ttt
+mv /etc/ttt /etc/sudoers
 
 systemctl enable --now fstrim.timer
 pacman -S ${QUIET} acpid dbus avahi cups

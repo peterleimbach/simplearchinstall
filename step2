@@ -75,7 +75,6 @@ pacman -S ${QUIET} xfce4-goodies
 
 pacman -S ${QUIET} lightdm lightdm-gtk-greeter
 systemctl enable lightdm.service
-
 ### Xfce (end)
 
 ### plasma (start)
@@ -95,6 +94,9 @@ pacman -S ${QUIET} firefox
 
 # Deutsches Sprachpaket
 pacman -S ${QUIET} firefox-i18n-de
+
+pacman -S darktable
+pacman -S kdenlive
 
 rm /step2
 

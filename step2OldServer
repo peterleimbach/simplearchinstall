@@ -77,7 +77,7 @@ pacman -S ${QUIET} xf86-input-synaptics
 
 ### plasma (start)
 pacman -S plasma-meta
-pacman -S kde-applications-meta
+#pacman -S kde-applications-meta
 pacman -S sddm sddm-kcm
 systemctl enable sddm.service
 ### plasma (end)

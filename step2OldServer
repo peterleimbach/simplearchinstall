@@ -68,20 +68,20 @@ pacman -S ${QUIET} xf86-input-synaptics
 
 ### Xfce (start)
 # Xfce an sich
-pacman -S ${QUIET} xfce4 
+#pacman -S ${QUIET} xfce4 
 
 # xfce4-goodies enthält weitere Programme und Plugins.
-pacman -S ${QUIET} xfce4-goodies
+#pacman -S ${QUIET} xfce4-goodies
 
-pacman -S ${QUIET} lightdm lightdm-gtk-greeter
-systemctl enable lightdm.service
+#pacman -S ${QUIET} lightdm lightdm-gtk-greeter
+#systemctl enable lightdm.service
 ### Xfce (end)
 
 ### plasma (start)
-#pacman -S plasma-meta
-#pacman -S kde-applications-meta
-#pacman -S sddm sddm-kcm
-#systemctl enable sddm.service
+pacman -S plasma-meta
+pacman -S kde-applications-meta
+pacman -S sddm sddm-kcm
+systemctl enable sddm.service
 ### plasma (end)
 
 pacman -S ${QUIET} networkmanager

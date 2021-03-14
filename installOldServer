@@ -27,12 +27,12 @@ mkdir -p /mnt/boot
 mount -L EFIBOOT /mnt/boot
 swapon -L p_swap
 
-# Filesystem Tabelle erzeugen
-genfstab -U -p /mnt >> /mnt/etc/fstab
-vi /mnt/etc/fstab
-
 # Basissystem installieren
 pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode git vim bash
+
+# Filesystem Tabelle erzeugen
+genfstab -U -p /mnt >> /mnt/etc/fstab
+vim /mnt/etc/fstab
 
 # chroot in neues Basissystem
 cp /root/simplearchinstall/step2OldServer /mnt/step2

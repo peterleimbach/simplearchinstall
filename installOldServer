@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Variablen setzen
+PARTITION=/dev/sda
+export PARTITION
+HOSTNAME=archfun
+
+# deutsche Tastaturbelegung laden
+loadkeys de-latin1
+
+# Festplatte partitionieren
+# es werden alle alten Partitionen gelöscht
+sgdisk --zap-all ${PARTITION}
+# es werden die üblichen drei Partitionen angelegt
+sgdisk -n 0:0:+1MiB -t 0:ef00 -c 0:MBR ${PARTITION}
+sgdisk -n 0:0:+8GiB -t 0:8200 -c 0:p_swap ${PARTITION}
+sgdisk -n 0:0:0 -t 0:8300 -c 0:p_arch ${PARTITION}
+
+# Partitionen formatieren
+mkswap -L p_swap ${PARTITION}p2
+mkfs.ext4 -L p_arch ${PARTITION}p3
+
+# Paritionen mounten
+mount -L p_arch /mnt
+mkdir -p /mnt/boot
+swapon -L p_swap
+
+# Filesystem Tabelle erzeugen
+genfstab -U -p /mnt >> /mnt/etc/fstab
+vi /mnt/etc/fstab
+
+# Basissystem installieren
+pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode git vim bash
+
+# chroot in neues Basissystem
+cp /root/simplearchinstall/step2OldServer /mnt/step2
+arch-chroot /mnt/ /usr/bin/sh /step2

@@ -1,0 +1,95 @@
+QUIET="--noconfirm"
+# Hostnamen setzen
+echo archlinux > /etc/hostname
+
+# Die Spracheinstellung (Locale) auf Deutsch festlegen.
+echo LANG=de_DE.UTF-8 > /etc/locale.conf
+locale-gen
+
+echo KEYMAP=de-latin1 > /etc/vconsole.conf
+echo FONT=lat9w-16 >> /etc/vconsole.conf
+
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+cat <<EOF > /etc/hosts
+#<ip-address>	<hostname.domain.org>	<hostname>
+127.0.0.1	localhost.localdomain	localhost ${HOSTNAME}
+::1		localhost.localdomain	localhost
+EOF
+
+# Passwort für root und peter abfragen
+read -p "Passwort für root und peter: " password
+
+# Passwort für den root-User setzen
+printf "${password}\n${password}\n" | passwd
+
+# weiteren Benutzer anlegen und den wichtigsten Gruppen zuweisen
+pacman -S ${QUIET} bash
+echo "weiteren Benutzer anlegen"
+useradd -m -g users -s /bin/bash peter
+gpasswd -a peter wheel
+printf "${password}\n${password}\n" | passwd peter
+sed "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers > /etc/ttt
+mv /etc/ttt /etc/sudoers
+
+# Initramfs erzeugen
+mkinitcpio -p linux
+
+# Installation des Bootloaders
+echo "Installation des Bootloaders"
+pacman -Syu
+pacman -S ${QUIET} dosfstools gptfdisk vim
+pacman -S ${QUIET} grub
+grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
+systemctl enable --now fstrim.timer
+pacman -S ${QUIET} acpid dbus avahi cups
+systemctl enable acpid
+systemctl enable avahi-daemon
+systemctl enable cups.service
+systemctl enable --now systemd-timesyncd.service
+
+pacman -S ${QUIET} xorg-server xorg-xinit xf86-video-intel
+cat <<EOF > /etc/X11/xorg.conf.d/00-keyboard.conf
+Section "InputClass"
+      Identifier "keyboard"
+      MatchIsKeyboard "yes"
+      Option "XkbLayout" "de"
+      Option "XkbModel" "pc105"
+      Option "XkbVariant" "deadgraveacute"
+EndSection
+EOF
+
+pacman -S ${QUIET} ttf-dejavu
+pacman -S ${QUIET} xf86-input-synaptics
+
+### Xfce (start)
+# Xfce an sich
+#pacman -S ${QUIET} xfce4 
+
+# xfce4-goodies enthält weitere Programme und Plugins.
+#pacman -S ${QUIET} xfce4-goodies
+
+#pacman -S ${QUIET} lightdm lightdm-gtk-greeter
+#systemctl enable lightdm.service
+### Xfce (end)
+
+### plasma (start)
+pacman -S plasma-meta
+pacman -S kde-applications-meta
+pacman -S sddm sddm-kcm
+systemctl enable sddm.service
+### plasma (end)
+
+pacman -S ${QUIET} networkmanager
+pacman -S ${QUIET} network-manager-applet
+pacman -S ${QUIET} gnome-keyring
+systemctl enable NetworkManager.service
+
+# firefox installieren
+pacman -S ${QUIET} firefox
+# Deutsches Sprachpaket
+pacman -S ${QUIET} firefox-i18n-de
+
+exit

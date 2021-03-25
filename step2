@@ -96,8 +96,15 @@ pacman -S ${QUIET} firefox
 # Deutsches Sprachpaket
 pacman -S ${QUIET} firefox-i18n-de
 
-pacman -S darktable
-pacman -S kdenlive
+pacman -S ${QUIET} darktable
+pacman -S ${QUIET} kdenlive
+
+# PulseAudio an sich
+pacman -S pulseaudio
+
+# Für Programme die nur Alsa unterstützen
+pacman -S pulseaudio-alsa
+pacman -S paprefs pavucontrol
 
 rm /step2
 

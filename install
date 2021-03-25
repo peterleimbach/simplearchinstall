@@ -1,5 +1,4 @@
 #!/bin/sh
-#
 
 # Variablen setzen
 PARTITION=/dev/nvme0n1

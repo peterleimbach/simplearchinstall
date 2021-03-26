@@ -102,11 +102,11 @@ pacman -S ${QUIET} darktable
 pacman -S ${QUIET} kdenlive
 
 # PulseAudio an sich
-pacman -S ${QUIET} pulseaudio
+#pacman -S ${QUIET} pulseaudio
 
 # Für Programme die nur Alsa unterstützen
-pacman -S ${QUIET} pulseaudio-alsa
-pacman -S ${QUIET} paprefs pavucontrol
+#pacman -S ${QUIET} pulseaudio-alsa
+#pacman -S ${QUIET} paprefs pavucontrol
 
 rm /step2
 

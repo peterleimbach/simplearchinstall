@@ -71,25 +71,25 @@ pacman -S ${QUIET} xf86-input-synaptics
 
 ### Xfce (start)
 # Xfce an sich
-pacman -S ${QUIET} xfce4 
+#pacman -S ${QUIET} xfce4 
 
 # xfce4-goodies enthält weitere Programme und Plugins.
-pacman -S ${QUIET} xfce4-goodies
+#pacman -S ${QUIET} xfce4-goodies
 
-pacman -S ${QUIET} lightdm lightdm-gtk-greeter
-systemctl enable lightdm.service
+#pacman -S ${QUIET} lightdm lightdm-gtk-greeter
+#systemctl enable lightdm.service
 ### Xfce (end)
 
 ### plasma (start)
-#pacman -S plasma-meta
-#pacman -S kde-applications-meta
-#pacman -S sddm sddm-kcm
-#systemctl enable sddm.service
+pacman -S ${QUIET} plasma-meta
+pacman -S ${QUIET} kde-applications-meta
+pacman -S ${QUIET} sddm sddm-kcm
+systemctl enable sddm.service
 ### plasma (end)
 
 pacman -S ${QUIET} networkmanager
 pacman -S ${QUIET} network-manager-applet
-pacman -S ${QUIET} gnome-keyring
+#pacman -S ${QUIET} gnome-keyring
 systemctl enable NetworkManager.service
 
 # Firefox an sich
@@ -102,11 +102,11 @@ pacman -S ${QUIET} darktable
 pacman -S ${QUIET} kdenlive
 
 # PulseAudio an sich
-pacman -S pulseaudio
+pacman -S ${QUIET} pulseaudio
 
 # Für Programme die nur Alsa unterstützen
-pacman -S pulseaudio-alsa
-pacman -S paprefs pavucontrol
+pacman -S ${QUIET} pulseaudio-alsa
+pacman -S ${QUIET} paprefs pavucontrol
 
 rm /step2
 

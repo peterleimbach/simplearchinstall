@@ -1,6 +1,4 @@
 #!/bin/sh
-# ein Test
-## Testerei
 
 # Variablen setzen
 PARTITION=/dev/nvme0n1

@@ -6,7 +6,9 @@ echo archlinux > /etc/hostname
 # Die Spracheinstellung (Locale) auf Deutsch festlegen.
 echo LANG=de_DE.UTF-8 > /etc/locale.conf
 echo LANGUAGE=de_DE >> /etc/locale.conf
+
 # Locale generieren
+echo de_DE.UTF-8 UTF-8 > /etc/locale.gen
 locale-gen
 
 echo KEYMAP=de-latin1 > /etc/vconsole.conf
@@ -107,6 +109,9 @@ pacman -S ${QUIET} kdenlive
 # Für Programme die nur Alsa unterstützen
 #pacman -S ${QUIET} pulseaudio-alsa
 #pacman -S ${QUIET} paprefs pavucontrol
+
+# sshfs
+pacman -S ${QUIET} sshfs
 
 rm /step2
 

@@ -113,6 +113,9 @@ pacman -S ${QUIET} kdenlive
 # sshfs
 pacman -S ${QUIET} sshfs
 
+# damit Drucker eingerichtet werden können
+pacman -S ${QUIET} system-config-printer
+
 rm /step2
 
 exit

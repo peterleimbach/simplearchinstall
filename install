@@ -32,7 +32,7 @@ pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano intel-ucode git v
 
 # Filesystem Tabelle erzeugen
 genfstab -U -p /mnt >> /mnt/etc/fstab
-sed "s/relatime/defaults,noatime/" /etc/fstab  > /mnt/etc/ttt
+sed "s/relatime/defaults,noatime/" /mnt/etc/fstab  > /mnt/etc/ttt
 mv /mnt/etc/ttt /mnt/etc/fstab
 
 # chroot in neues Basissystem

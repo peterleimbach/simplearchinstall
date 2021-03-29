@@ -114,10 +114,15 @@ pacman -S ${QUIET} kdenlive
 pacman -S ${QUIET} sshfs
 
 # damit Drucker eingerichtet werden können
-pacman -S ${QUIET} system-config-printer
+pacman -S ${QUIET} system-config-printer a2ps ghostscript cups-pdf
+#git clone https://aur.archlinux.org/brother-mfc-9332cdw.git
+# multilib enablen
+#sed "s/#[multilib]/[multilib]/" /etc/pacman.conf | sed "s/
+#pacman -Sy ${QUIET} lib32-libcups
+#makepkg -si
 
-# damit der Drucker gefunden wird über avahi
-pacman -Sy nss-mdns
+# damit der Drucker gefunden wird über avahi z.B. mit lpinfo --include-schemes dnssd -v
+pacman -Sy ${QUIET} nss-mdns
 # zusätzlich muss die Datei /etc/nsswitch.conf noch angepasst werden
 # hosts: ... mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns ...
 sed "s/resolve/mdns_minimal [NOTFOUND=return] resolve/" /etc/nsswitch.conf > /etc/ttt

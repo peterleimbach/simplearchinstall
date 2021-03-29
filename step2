@@ -116,6 +116,13 @@ pacman -S ${QUIET} sshfs
 # damit Drucker eingerichtet werden können
 pacman -S ${QUIET} system-config-printer
 
+# damit der Drucker gefunden wird über avahi
+pacman -Sy nss-mdns
+# zusätzlich muss die Datei /etc/nsswitch.conf noch angepasst werden
+# hosts: ... mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns ...
+sed "s/resolve/mdns_minimal [NOTFOUND=return] resolve/" /etc/nsswitch.conf > /etc/ttt
+mv /etc/ttt /etc/nsswitch.conf
+
 rm /step2
 
 exit

@@ -78,7 +78,7 @@ pacman -S ${QUIET} xfce4
 # xfce4-goodies enthält weitere Programme und Plugins.
 pacman -S ${QUIET} xfce4-goodies
 
-#pacman -S ${QUIET} lightdm lightdm-gtk-greeter
+pacman -S ${QUIET} lightdm lightdm-gtk-greeter
 systemctl enable lightdm.service
 pacman -S ${QUIET} gnome-keyring
 ### Xfce (end)

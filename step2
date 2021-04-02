@@ -116,9 +116,8 @@ pacman -S ${QUIET} sshfs
 # flameshot
 pacman -S ${QUIET} flameshot
 
-
 # damit Drucker eingerichtet werden können
-#pacman -S ${QUIET} system-config-printer
+pacman -S ${QUIET} system-config-printer
 #git clone https://aur.archlinux.org/brother-mfc-9332cdw.git
 # multilib enablen
 #sed "s/#[multilib]/[multilib]/" /etc/pacman.conf | sed "s/

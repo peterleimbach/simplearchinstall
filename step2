@@ -1,4 +1,5 @@
 # Variable, um pacman ohne Rückfragen laufen lassen zu können
+# Test
 QUIET="--noconfirm"
 # Hostnamen setzen
 echo archlinux > /etc/hostname

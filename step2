@@ -51,7 +51,7 @@ cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable --now fstrim.timer
-pacman -S ${QUIET} acpid dbus avahi cups
+pacman -S ${QUIET} acpid dbus avahi cups cups-pdf ghostscript a2ps
 systemctl enable acpid
 systemctl enable avahi-daemon
 systemctl enable cups.service
@@ -73,48 +73,51 @@ pacman -S ${QUIET} xf86-input-synaptics
 
 ### Xfce (start)
 # Xfce an sich
-#pacman -S ${QUIET} xfce4 
+pacman -S ${QUIET} xfce4 
 
 # xfce4-goodies enthält weitere Programme und Plugins.
-#pacman -S ${QUIET} xfce4-goodies
+pacman -S ${QUIET} xfce4-goodies
 
 #pacman -S ${QUIET} lightdm lightdm-gtk-greeter
-#systemctl enable lightdm.service
+systemctl enable lightdm.service
+pacman -S ${QUIET} gnome-keyring
 ### Xfce (end)
 
 ### plasma (start)
-pacman -S ${QUIET} plasma-meta
-pacman -S ${QUIET} kde-applications-meta
-pacman -S ${QUIET} sddm sddm-kcm
-systemctl enable sddm.service
+#pacman -S ${QUIET} plasma-meta
+#pacman -S ${QUIET} kde-applications-meta
+#pacman -S ${QUIET} sddm sddm-kcm
+#systemctl enable sddm.service
 ### plasma (end)
 
 pacman -S ${QUIET} networkmanager
 pacman -S ${QUIET} network-manager-applet
-#pacman -S ${QUIET} gnome-keyring
 systemctl enable NetworkManager.service
 
 # Firefox an sich
-pacman -S ${QUIET} firefox 
-
+#pacman -S ${QUIET} firefox 
 # Deutsches Sprachpaket
-pacman -S ${QUIET} firefox-i18n-de
+#pacman -S ${QUIET} firefox-i18n-de
 
 pacman -S ${QUIET} darktable
 pacman -S ${QUIET} kdenlive
 
 # PulseAudio an sich
-#pacman -S ${QUIET} pulseaudio
+pacman -S ${QUIET} pulseaudio
 
 # Für Programme die nur Alsa unterstützen
-#pacman -S ${QUIET} pulseaudio-alsa
-#pacman -S ${QUIET} paprefs pavucontrol
+pacman -S ${QUIET} pulseaudio-alsa
+pacman -S ${QUIET} paprefs pavucontrol
 
 # sshfs
 pacman -S ${QUIET} sshfs
 
+# flameshot
+pacman -S ${QUIET} flameshot
+
+
 # damit Drucker eingerichtet werden können
-pacman -S ${QUIET} system-config-printer a2ps ghostscript cups-pdf
+#pacman -S ${QUIET} system-config-printer
 #git clone https://aur.archlinux.org/brother-mfc-9332cdw.git
 # multilib enablen
 #sed "s/#[multilib]/[multilib]/" /etc/pacman.conf | sed "s/

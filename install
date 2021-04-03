@@ -1,8 +1,9 @@
 #!/bin/sh
+###
 # Peter Leimbach
 # 30.03.2021
 # Aufgabe: einfache, automatisierte Installation von Arch Linux auf meinen Rechnern
-#
+###
 
 # Variablen setzen
 PARTITION=/dev/nvme0n1

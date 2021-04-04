@@ -6,6 +6,7 @@
 ###
 
 # Variablen setzen
+# Test
 PARTITION=/dev/nvme0n1
 export PARTITION
 HOSTNAME=archfun

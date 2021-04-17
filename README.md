@@ -1,4 +1,4 @@
-# Fast testing new Arch Linux configurations#
+#Fast testing new Arch Linux configurations
 
 Since the beginning of 2021 I play a little more with Arch Linux. To get more famliar I often make a fresh install on a new machine to test different configurations e.g. XFCE4 versus KDE Plasma 5, some applications but basic configurations too.
 

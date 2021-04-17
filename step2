@@ -77,18 +77,26 @@ pacman -S ${QUIET} xf86-input-synaptics
 pacman -S ${QUIET} xfce4 
 
 # xfce4-goodies enthält weitere Programme und Plugins.
-pacman -S ${QUIET} xfce4-goodies
+#pacman -S ${QUIET} xfce4-goodies
 
-pacman -S ${QUIET} lightdm lightdm-gtk-greeter
-systemctl enable lightdm.service
-pacman -S ${QUIET} gnome-keyring
+#pacman -S ${QUIET} lightdm lightdm-gtk-greeter
+#systemctl enable lightdm.service
+#pacman -S ${QUIET} gnome-keyring
+# damit Drucker eingerichtet werden können
+#pacman -S ${QUIET} system-config-printer
+# damit der Drucker gefunden wird über avahi z.B. mit lpinfo --include-schemes dnssd -v
+#pacman -Sy ${QUIET} nss-mdns
+# zusätzlich muss die Datei /etc/nsswitch.conf noch angepasst werden
+# hosts: ... mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns ...
+#sed "s/resolve/mdns_minimal [NOTFOUND=return] resolve/" /etc/nsswitch.conf > /etc/ttt
+#mv /etc/ttt /etc/nsswitch.conf
 ### Xfce (end)
 
 ### plasma (start)
-#pacman -S ${QUIET} plasma-meta
-#pacman -S ${QUIET} kde-applications-meta
-#pacman -S ${QUIET} sddm sddm-kcm
-#systemctl enable sddm.service
+pacman -S ${QUIET} plasma-meta
+pacman -S ${QUIET} kde-applications-meta
+pacman -S ${QUIET} sddm sddm-kcm
+systemctl enable sddm.service
 ### plasma (end)
 
 pacman -S ${QUIET} networkmanager
@@ -116,20 +124,11 @@ pacman -S ${QUIET} sshfs
 # flameshot
 pacman -S ${QUIET} flameshot
 
-# damit Drucker eingerichtet werden können
-pacman -S ${QUIET} system-config-printer
 #git clone https://aur.archlinux.org/brother-mfc-9332cdw.git
 # multilib enablen
 #sed "s/#[multilib]/[multilib]/" /etc/pacman.conf | sed "s/
 #pacman -Sy ${QUIET} lib32-libcups
 #makepkg -si
-
-# damit der Drucker gefunden wird über avahi z.B. mit lpinfo --include-schemes dnssd -v
-pacman -Sy ${QUIET} nss-mdns
-# zusätzlich muss die Datei /etc/nsswitch.conf noch angepasst werden
-# hosts: ... mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns ...
-sed "s/resolve/mdns_minimal [NOTFOUND=return] resolve/" /etc/nsswitch.conf > /etc/ttt
-mv /etc/ttt /etc/nsswitch.conf
 
 rm /step2
 

@@ -1,6 +1,8 @@
-# Since the beginning of 2021 I play a little more with Arch Linux #
+# Fast testing new Arch Linux configurations#
 
-Since I often build a new machine to test different configurations and startover with a clean install afterwards, it makes sense to put an installation script on Github.
+Since the beginning of 2021 I play a little more with Arch Linux. To get more famliar I often make a fresh install on a new machine to test different configurations e.g. XFCE4 versus KDE Plasma 5, some applications but basic configurations too.
+
+Afterwards I startover with a clean new install. Therefore it makes sense to put an installation script on Github.
 
 After booting from the Arch Linux USB stick, an automated installation can be done very easily.
 The install will only take around 1 - 2 minutes with a fast internet connection.

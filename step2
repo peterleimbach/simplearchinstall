@@ -83,13 +83,6 @@ pacman -S ${QUIET} xfce4
 #systemctl enable lightdm.service
 #pacman -S ${QUIET} gnome-keyring
 # damit Drucker eingerichtet werden können
-#pacman -S ${QUIET} system-config-printer
-# damit der Drucker gefunden wird über avahi z.B. mit lpinfo --include-schemes dnssd -v
-#pacman -Sy ${QUIET} nss-mdns
-# zusätzlich muss die Datei /etc/nsswitch.conf noch angepasst werden
-# hosts: ... mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns ...
-#sed "s/resolve/mdns_minimal [NOTFOUND=return] resolve/" /etc/nsswitch.conf > /etc/ttt
-#mv /etc/ttt /etc/nsswitch.conf
 ### Xfce (end)
 
 ### plasma (start)
@@ -98,6 +91,14 @@ pacman -S ${QUIET} kde-applications-meta
 pacman -S ${QUIET} sddm sddm-kcm
 systemctl enable sddm.service
 ### plasma (end)
+
+pacman -S ${QUIET} system-config-printer
+# damit der Drucker gefunden wird über avahi z.B. mit lpinfo --include-schemes dnssd -v
+pacman -Sy ${QUIET} nss-mdns
+# zusätzlich muss die Datei /etc/nsswitch.conf noch angepasst werden
+# hosts: ... mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns ...
+sed "s/resolve/mdns_minimal [NOTFOUND=return] resolve/" /etc/nsswitch.conf > /etc/ttt
+mv /etc/ttt /etc/nsswitch.conf
 
 pacman -S ${QUIET} networkmanager
 pacman -S ${QUIET} network-manager-applet

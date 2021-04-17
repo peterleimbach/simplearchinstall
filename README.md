@@ -1,4 +1,4 @@
-#Fast testing new Arch Linux configurations
+# Fast testing new Arch Linux configurations
 
 Since the beginning of 2021 I play a little more with Arch Linux. To get more famliar I often make a fresh install on a new machine to test different configurations e.g. XFCE4 versus KDE Plasma 5, some applications but basic configurations too.
 
@@ -16,13 +16,13 @@ You can of course use it for your own configuration and adapt the skript.
 
 Commands
 
-loadkeys de-latin1
+#loadkeys de-latin1
 
-pacman -Sy git
+#pacman -Sy git
 
-git clone https://github.com/peterleimbach/simplearchinstall
+#git clone https://github.com/peterleimbach/simplearchinstall
 
-cd simplearchinstall
+#cd simplearchinstall
 
-sh install
+#sh install
 

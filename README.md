@@ -15,8 +15,12 @@ You can of course use it for your own configuration and adapt the skript.
 Commands
 
 loadkeys de-latin1
+
 pacman -Sy git
+
 git clone https://github.com/peterleimbach/simplearchinstall
+
 cd simplearchinstall
+
 sh install
 

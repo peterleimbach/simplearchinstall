@@ -13,10 +13,8 @@ Becareful to check the script before executing as it complete erases the ssd and
 You can of course use it for your own configuration and adapt the skript.
 
 Commands
-# loadkeys de-latin1
+<# loadkeys de-latin1
 # pacman -Sy git
 # git clone https://github.com/peterleimbach/simplearchinstall
 # cd simplearchinstall
-# sh install
-
-Translated with www.DeepL.com/Translator (free version)
+# sh install>

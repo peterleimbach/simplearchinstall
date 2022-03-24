@@ -7,8 +7,10 @@
 
 # Variablen setzen
 # Test
+# Das ist meine SSD in dem kleinen Intel NUC
 PARTITION=/dev/nvme0n1
 export PARTITION
+# der Hostname sollte gesetzt werden, ist aber beliebig
 HOSTNAME=archfun
 
 # deutsche Tastaturbelegung laden
